@@ -32,7 +32,7 @@ productsRouter.post('/', (req ,res) => {
     {
         return res.send({status: 'Error', mensaje: 'Algun campo es incorrecto'})
     }
-    const producto = {...{id:'1', status: true, thumbnails: [] },...req.body }
+    const producto = {...{id: productManager.crearIdUnico(), status: true, thumbnails: [] },...req.body }
 
     products = productManager.leerDatos()
     products.push(producto)

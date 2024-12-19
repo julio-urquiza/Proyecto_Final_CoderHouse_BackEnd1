@@ -12,7 +12,7 @@ cartRouter.post('/',(req, res) => {
 
     if(!products) return res.send({status: 'Error', mensaje: 'Algun campo esta incompleto o es incorrecto'})
     
-    const cart = {...{id:'1'}, ...req.body}
+    const cart = {...{id: cartManager.crearIdUnico()}, ...req.body}
 
     carts = cartManager.leerDatos()
     carts.push(cart)

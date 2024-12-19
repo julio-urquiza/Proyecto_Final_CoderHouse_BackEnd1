@@ -16,17 +16,34 @@ class Manager {
         }
         return null
     }
+    crearIdUnico = () =>{
+        const lista = this.leerDatos()
+
+        if(lista.length == 0) return 1
+
+        let idProximo = lista[lista.length - 1].id 
+        
+        let condicion
+        do {
+            idProximo++
+            condicion = lista.some(item => item.id == idProximo)
+        } while (condicion);
+
+        return idProximo
+    }
 }
 
 export default Manager
 
-// const julioManager = new Manager('../BBDD/julioManager.json')
+// const julioManager = new Manager('../BBDD/prueba.json')
 
 // const datos = [
-//     {nombre: 'julio', apellido: 'urquiza'},
-//     {nombre: 'julio', apellido: 'urquiza'},
-//     {nombre: 'julio', apellido: 'urquiza'}
+//     {id: 1, nombre: 'julio', apellido: 'urquiza'},
+//     {id: 2, nombre: 'julio', apellido: 'urquiza'},
+//     {id: 3, nombre: 'julio', apellido: 'urquiza'}
 // ]
 // julioManager.guardarDatos(datos)
 
 // console.log(julioManager.leerDatos())
+
+// console.log(julioManager.crearIdUnico())
