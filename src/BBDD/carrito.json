@@ -1,11 +1,4 @@
 [
-  {
-    "id": "1",
-    "products": [
-      {
-        "quantity": 20,
-        "product": 1
-      }
-    ]
-  }
+  {"product": "Laptop Gamer", "quantity": 1},
+  {"product": "Mochila", "quantity": 1}
 ]

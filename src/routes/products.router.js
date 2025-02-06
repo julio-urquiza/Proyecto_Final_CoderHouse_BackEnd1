@@ -1,83 +1,84 @@
 import { Router } from "express"
-import Manager from "../manager/manager.js"
+import productModel from '../models/product.model.js'
 
 const productsRouter = Router()
-const productManager = new Manager('./src/BBDD/productos.json')
-
-let products = []
 
 //ruta get que me retorna todo el listado de products
-productsRouter.get('/',(req, res) => {
-    products = productManager.leerDatos()
-    return res.send(products)
+productsRouter.get('/', async(req, res) => {
+    try{
+        const { limit = 20, page = 1, sort = 0 } = req.query;
+        let opciones = {limit: parseInt(limit), page: parseInt(page)}
+        let query = req.query.query? JSON.parse(req.query.query) : {}
+        if(sort == 1 || sort == -1) opciones.sort = {price: parseInt(sort)}
+
+        const products = await productModel.paginate(query, opciones)
+        res.json({
+            status: 'success',
+            payload: products.docs,
+            totalPages: products.totalPages,
+            prevPage: products.prevPage,
+            nextPage: products.nextPage,
+            page: products.page,
+            hasPrevPage: products.hasPrevPage,
+            hasNextPage: products.hasNextPage,
+            prevLink: products.hasPrevPage ? `/api/products?limit=${limit}&page=${products.prevPage}&sort=${sort}&query=${query}` : null,
+            nextLink: products.hasNextPage ? `/api/products?limit=${limit}&page=${products.nextPage}&sort=${sort}&query=${query}` : null,
+        });
+    }
+    catch(error){
+        res.send({status: 'Error', error})
+    }
 })
 
 //ruta get retorna el un producto por el id
-productsRouter.get('/:id',(req, res) => {
-    const {id} = req.params
-
-    products = productManager.leerDatos()
-    const producto = products.find(product => product.id == id)
-
-    if(!producto) return res.send({status: 'Error', mensaje: 'No se pudo encontrar el producto'})
-
-    res.send(producto)
+productsRouter.get('/:id', async (req, res) => {
+    try{
+        const { id } = req.params
+        const product = await productModel.findById(id).lean()
+        res.send(product)
+    }
+    catch(error){
+        res.send({status: 'Ocurrio un error', error})
+    }
 })
 
 //ruta post para products
-productsRouter.post('/', (req ,res) => {
-    const {title, description, code, price, stock, category} = req.body
-
-    if(!title || !description || !code || !price || !stock || !category)
-    {
-        return res.send({status: 'Error', mensaje: 'Algun campo es incorrecto'})
+productsRouter.post('/', async (req ,res) => {
+    try{
+        const product = req.body
+        const result = await productModel.create(product)
+        res.send({status: 'success', mensaje: 'producto creado correctamente', result})
     }
-    const producto = {...{id: productManager.crearIdUnico(), status: true, thumbnails: [] },...req.body }
-
-    products = productManager.leerDatos()
-    products.push(producto)
-    productManager.guardarDatos(products)
-
-    return res.send({status: 'success', mensaje: 'producto creado correctamente'})
+    catch(error){
+        res.send({status: 'Ocurrio un error', error})
+        
+    }
 })
 
 //ruta put para modificar productos
-productsRouter.put('/:id', (req, res) => {
-    const {id} = req.params
-    const body = req.body
-
-    if(!body.title || !body.description || !body.code || !body.price || !body.stock || !body.category || !body.thumbnails){
-        return res.send({status: 'Error', mensaje: 'Uno de los campos es incorrecto'})
+productsRouter.put('/:id', async (req, res) => {
+    try{
+        const { id } = req.params
+        const product = req.body
+        const result = await productModel.findByIdAndUpdate(id,product)
+        res.send({status: 'Success', mensaje: 'El producto ha sido modificado con exito', result})
     }
-    
-    products = productManager.leerDatos()
-    let index = products.findIndex(product => product.id == id)
-
-    if(index == -1) {
-        return res.send({status: 'Error', mensaje: 'El producto no ha sido encontrado'})
+    catch(error){
+        res.send({status: 'Ocurrio un error', error})
     }
-
-    products[index] = {...products[index],...body}
-
-    productManager.guardarDatos(products)
-
-    return res.send({status: 'Success', mensaje: 'El producto ha sido modificado con exito'})
 })
 
-productsRouter.delete('/:id', (req, res) => {
-    const {id} = req.params
-
-    products = productManager.leerDatos()
-    const indexOfProduct = products.findIndex(product => product.id == id)
-
-    if(indexOfProduct == -1) return res.send({status: 'Error', mensaje: 'No se pudo encontrar el producto'})
-
-    const productoEliminado = products.splice(indexOfProduct,1)
-    productManager.guardarDatos(products)
-    
-    return res.send(productoEliminado)
+//ruta put para eliminar productos
+productsRouter.delete('/:id', async (req, res) => {
+    try{
+        const { id } = req.params
+        const result = await productModel.findByIdAndDelete(id)
+        res.send({status: 'Success', mensaje: 'El producto ha sido eliminado con exito'})
+    }
+    catch(error){
+        res.send({status: 'Ocurrio un error', error})
+    }
 })
-
 
 export default productsRouter
 

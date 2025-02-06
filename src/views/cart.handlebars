@@ -1,0 +1,18 @@
+<section class="flex-container">
+    <h1>Carrito</h1>
+</section>
+
+<section class="flex-container">
+    {{#each cart.products}}
+        <article class="product-grid">
+            <div class="product-card">
+                <h2>{{product.title}}</h2>
+                <p>{{product.description}}</p>
+                <p>Precio: ${{product.price}}</p>
+                <p>Codigo: {{product.code}}</p>
+                <p>Cantidad: {{quantity}}</p>
+                <button>Quitar</button>
+            </div>
+        </article>
+    {{/each}}
+</section>

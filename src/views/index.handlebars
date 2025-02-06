@@ -1,7 +1,30 @@
-<h1>hola esto es el index</h1>
+<section class="flex-container">
+    <h1>Listado de productos</h1>
+</section>
 
-<h2>lista de usuarios</h2>
-<ul id="lista-usuarios"></ul>
+<section class="flex-container">
+    {{#each products.docs}}
+    <article class="product-grid">
+        <div class="product-card">
+            <h2>{{title}}</h2>
+            <p>{{description}}</p>
+            <p>Precio: ${{price}}</p>
+            <p>Codigo: {{code}}</p>
+            <p>Stock: {{stock}}</p>
+            <button>Agregar al carrito</button>
+        </div>
+    </article>
+    {{/each}}
+</section>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.min.js"></script>
-<script src="js/main.js"></script>
+<section class="flex-container">    
+    <div class="footer">
+        <p>Página {{products.page}} de {{products.totalPages}}</p>
+        {{#if products.hasPrevPage}}
+            <a href="/products?page={{products.prevPage}}">Anterior</a>
+        {{/if}}
+        {{#if products.hasNextPage}}
+            <a href="/products?page={{products.nextPage}}">Siguiente</a>
+        {{/if}}
+    </div>
+</section>

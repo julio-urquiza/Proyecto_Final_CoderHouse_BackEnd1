@@ -1,3 +1,162 @@
 [
-    {"title":"fideos" ,"description":"fideos integrales" ,"price": 1000}
+  {
+    "title": "Laptop Gamer",
+    "description": "Potente laptop para gaming con procesador Intel i7 y tarjeta gráfica RTX 3060.",
+    "price": 1500.99,
+    "img": "https://example.com/laptop-gamer.jpg",
+    "code": "PROD001",
+    "stock": 20
+  },
+  {
+    "title": "Smartphone Pro",
+    "description": "Teléfono inteligente con pantalla OLED y cámara de 108MP.",
+    "price": 899.99,
+    "img": "https://example.com/smartphone-pro.jpg",
+    "code": "PROD002",
+    "stock": 50
+  },
+  {
+    "title": "Auriculares Inalámbricos",
+    "description": "Auriculares con cancelación de ruido y batería de larga duración.",
+    "price": 199.99,
+    "img": "https://example.com/auriculares.jpg",
+    "code": "PROD003",
+    "stock": 75
+  },
+  {
+    "title": "Monitor 4K",
+    "description": "Monitor UHD de 27 pulgadas con HDR y 144Hz de refresco.",
+    "price": 499.99,
+    "img": "https://example.com/monitor-4k.jpg",
+    "code": "PROD004",
+    "stock": 30
+  },
+  {
+    "title": "Teclado Mecánico RGB",
+    "description": "Teclado mecánico con switches rojos y retroiluminación RGB personalizable.",
+    "price": 129.99,
+    "img": "https://example.com/teclado-rgb.jpg",
+    "code": "PROD005",
+    "stock": 100
+  },
+  {
+    "title": "Silla Ergonómica",
+    "description": "Silla de oficina ergonómica con soporte lumbar ajustable.",
+    "price": 249.99,
+    "img": "https://example.com/silla-ergonomica.jpg",
+    "code": "PROD006",
+    "stock": 40
+  },
+  {
+    "title": "Cámara Web Full HD",
+    "description": "Cámara web con resolución 1080p y micrófono integrado.",
+    "price": 89.99,
+    "img": "https://example.com/camara-web.jpg",
+    "code": "PROD007",
+    "stock": 60
+  },
+  {
+    "title": "Disco Duro Externo 2TB",
+    "description": "Disco duro portátil con USB 3.0 y alta velocidad de transferencia.",
+    "price": 119.99,
+    "img": "https://example.com/disco-duro.jpg",
+    "code": "PROD008",
+    "stock": 25
+  },
+  {
+    "title": "Mochila Antirrobo",
+    "description": "Mochila con compartimentos ocultos y puerto USB integrado.",
+    "price": 59.99,
+    "img": "https://example.com/mochila-antirrobo.jpg",
+    "code": "PROD009",
+    "stock": 80
+  },
+  {
+    "title": "Reloj Inteligente",
+    "description": "Smartwatch con monitor de ritmo cardíaco y notificaciones en tiempo real.",
+    "price": 149.99,
+    "img": "https://example.com/reloj-inteligente.jpg",
+    "code": "PROD010",
+    "stock": 55
+  },
+  {
+    "title": "Tablet 10 pulgadas",
+    "description": "Tablet con pantalla Full HD y 64GB de almacenamiento.",
+    "price": 299.99,
+    "img": "https://example.com/tablet.jpg",
+    "code": "PROD011",
+    "stock": 35
+  },
+  {
+    "title": "Impresora Multifunción",
+    "description": "Impresora con escáner, copiadora y conexión Wi-Fi.",
+    "price": 199.99,
+    "img": "https://example.com/impresora.jpg",
+    "code": "PROD012",
+    "stock": 20
+  },
+  {
+    "title": "Router Wi-Fi 6",
+    "description": "Router de alta velocidad compatible con Wi-Fi 6 y múltiples dispositivos.",
+    "price": 129.99,
+    "img": "https://example.com/router.jpg",
+    "code": "PROD013",
+    "stock": 50
+  },
+  {
+    "title": "Mouse Inalámbrico",
+    "description": "Mouse ergonómico inalámbrico con sensor óptico de alta precisión.",
+    "price": 49.99,
+    "img": "https://example.com/mouse.jpg",
+    "code": "PROD014",
+    "stock": 70
+  },
+  {
+    "title": "Lámpara LED Inteligente",
+    "description": "Lámpara con control por voz y múltiples colores ajustables.",
+    "price": 39.99,
+    "img": "https://example.com/lampara.jpg",
+    "code": "PROD015",
+    "stock": 90
+  },
+  {
+    "title": "Batería Externa 20000mAh",
+    "description": "Power bank con carga rápida y múltiples puertos USB.",
+    "price": 79.99,
+    "img": "https://example.com/bateria.jpg",
+    "code": "PROD016",
+    "stock": 45
+  },
+  {
+    "title": "Altavoz Bluetooth",
+    "description": "Parlante portátil con sonido envolvente y resistencia al agua.",
+    "price": 89.99,
+    "img": "https://example.com/altavoz.jpg",
+    "code": "PROD017",
+    "stock": 55
+  },
+  {
+    "title": "Cargador Rápido USB-C",
+    "description": "Cargador de 65W compatible con múltiples dispositivos USB-C.",
+    "price": 29.99,
+    "img": "https://example.com/cargador.jpg",
+    "code": "PROD018",
+    "stock": 100
+  },
+  {
+    "title": "Gafas de Realidad Virtual",
+    "description": "Gafas VR compatibles con PC y consolas.",
+    "price": 349.99,
+    "img": "https://example.com/gafas-vr.jpg",
+    "code": "PROD019",
+    "stock": 15
+  },
+  {
+    "title": "Controlador de Juegos",
+    "description": "Gamepad inalámbrico con compatibilidad para PC y consolas.",
+    "price": 59.99,
+    "img": "https://example.com/gamepad.jpg",
+    "code": "PROD020",
+    "stock": 65
+  }
 ]
