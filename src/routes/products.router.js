@@ -4,12 +4,22 @@ import productModel from '../models/product.model.js'
 const productsRouter = Router()
 
 //ruta get que me retorna todo el listado de products
+// Deberá poder recibir por query params un limit (opcional), una page (opcional), un sort (opcional) y un query (opcional)
+// -limit permitirá devolver sólo el número de elementos solicitados al momento de la petición, en caso de no recibir limit, éste será de 10.
+// -page permitirá devolver la página que queremos buscar, en caso de no recibir page, ésta será de 1
+// -query, el tipo de elemento que quiero buscar (es decir, qué filtro aplicar), en caso de no recibir query, realizar la búsqueda general
+// -sort: asc/desc, para realizar ordenamiento ascendente o descendente por precio, en caso de no recibir sort, no realizar ningún ordenamiento
 productsRouter.get('/', async(req, res) => {
     try{
-        const { limit = 20, page = 1, sort = 0 } = req.query;
+        const { limit = 10, page = 1, sort} = req.query;
+
         let opciones = {limit: parseInt(limit), page: parseInt(page)}
+
         let query = req.query.query? JSON.parse(req.query.query) : {}
-        if(sort == 1 || sort == -1) opciones.sort = {price: parseInt(sort)}
+
+        if(sort === 'asc') opciones.sort = {price: 1}
+        if(sort === 'desc') opciones.sort = {price: -1}
+
 
         const products = await productModel.paginate(query, opciones)
         res.json({
