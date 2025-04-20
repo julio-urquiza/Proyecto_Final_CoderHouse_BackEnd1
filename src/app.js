@@ -27,6 +27,7 @@ app.use(passport.initialize())
 // app.use('/api/carts',cartRouter)
 // app.use('/', viewRouter)
 
+// ruta de users
 app.use('/api/user', userRouter)
 
 
