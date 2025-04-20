@@ -1,5 +1,5 @@
 import { Router } from "express"
-import productModel from '../models/product.model.js'
+import productModel from '../daos/mongoDB/models/product.model.js'
 
 const productsRouter = Router()
 
