@@ -27,19 +27,11 @@ export default class MongoDao {
         }
     };
 
-    update = async (id, body) => {
-        try {
-        return await this.model.findByIdAndUpdate(id, body, { new: true });
-        } catch (error) {
-        throw new Error(error);
-        }
-    };
-
-    delete = async (id) => {
-        try {
-        return await this.model.findByIdAndDelete(id);
-        } catch (error) {
-        throw new Error(error);
-        }
-    };
+  getById = async (id) => {
+    try {
+      return await this.dao.getById(id);
+    } catch (error) {
+      throw error;
+    }
+  }
 }  
