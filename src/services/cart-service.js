@@ -1,7 +1,7 @@
 import { cartDao } from "../daos/mongoDB/cart-dao.js"
 import CustomError from "../utils/custom-error.js"
 
-class cartService {
+class CartService {
     constructor(dao){
         this.dao = dao
     }
@@ -10,7 +10,7 @@ class cartService {
         try{
             return await this.dao.getAll()
         } catch (error){
-            throw new CustomError(error)
+            throw error
         }
     }
 
@@ -26,23 +26,41 @@ class cartService {
         try{
             return await this.dao.create(body)
         }catch (error){
-            throw new Error(error)
+            throw error
         }
     }
 
     update = async (id, body) => {
         try {
-        return await this.dao.update(id, body);
+            return await this.dao.update(id, body);
         } catch (error) {
-        throw new Error(error);
+            throw error;
         }
     }
 
     delete = async (id) => {
         try {
-        return await this.dao.delete(id);
+            return await this.dao.delete(id);
         } catch (error) {
-        throw new Error(error);
+            throw error;
+        }
+    }
+
+    findByIdPopulate = async (id , path, select) => {
+        try{
+            return this.dao.findById(id).populate(path, select)
+        }catch (error) {
+            throw error
+        }
+    }
+
+    findPopulate = async (path, select) => {
+        try{
+            return this.dao.find().populate(path,select)
+        }catch(error){
+            throw error
         }
     }
 }
+
+export const cartService = new CartService(cartDao)
