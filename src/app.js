@@ -28,7 +28,7 @@ app.use(passport.initialize())
 // app.use('/', viewRouter)
 
 // ruta de users
-app.use('/api/user', userRouter)
+app.use('/api', userRouter)
 
 
 // MongoDB

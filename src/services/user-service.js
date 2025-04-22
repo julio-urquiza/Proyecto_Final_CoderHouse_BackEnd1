@@ -1,11 +1,12 @@
-import { userDao } from "../daos/mongodb/user-dao.js";
+import { userDao } from "../daos/mongoDB/user-dao.js";
 import CustomError from "../utils/custom-error.js";
 import { createHash, isValidPassword } from "../utils/user-utils.js";
 import jwt from "jsonwebtoken";
+import Service from "./service.js";
 
-class UserService {
+class UserService extends Service{
   constructor(dao) {
-    this.dao = dao;
+    super(dao)
   }
 
   register = async (body) => {
@@ -35,14 +36,6 @@ class UserService {
       throw error;
     }
   };
-
-  getById = async (id) => {
-    try {
-      return await this.dao.getById(id);
-    } catch (error) {
-      throw error;
-    }
-  }
 
   generateToken = (user) => {
     const payload = {

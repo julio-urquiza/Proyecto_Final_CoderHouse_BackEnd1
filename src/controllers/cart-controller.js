@@ -1,4 +1,4 @@
-import { cartService } from "../services/cart-service";
+import { cartService } from "../services/cart-service.js";
 
 class CartController {
     constructor(service) {
@@ -55,7 +55,7 @@ class CartController {
         try{
             const {cid,pid} = req.params
             const quantity = parseInt(req.body.quantity)
-            const cart = await cartModel.updateOne({_id: cid , 'products.product': pid},{ $set: {'products.$.quantity' : quantity } }, { new: true })
+            const cart = await this.service.updateOne({_id: cid , 'products.product': pid},{ $set: {'products.$.quantity' : quantity } })
             res.send(cart)
         }
         catch(error){
@@ -68,7 +68,7 @@ class CartController {
             const {cid} = req.params
             const products = req.body
             // const cart = await cartModel.updateOne(cid, { $set: { products: products } }, { new: true }) ???
-            const cart = await cartModel.findById(cid)
+            const cart = await this.service.getById(cid)
             cart.products = products
             cart.save()
             res.send(cart)
@@ -81,7 +81,7 @@ class CartController {
     eliminarTodosLosProductosDeCarrito = async (req, res) => {
         try{
             const {cid} = req.params
-            const cart = await cartModel.findById(cid)
+            const cart = await this.service.getById(cid)
             cart.products = []
             cart.save()
             res.send(cart)
@@ -94,7 +94,7 @@ class CartController {
     eliminarProductoSeleccionadoDeCarrito = async (req, res) => {
         try{
             const {cid,pid} = req.params
-            const cart = await cartModel.findByIdAndUpdate(cid,{ $pull: { products: { product: pid } } }, { new: true })
+            const cart = await this.service.update(cid,{ $pull: { products: { product: pid }}})
             res.send(cart)
         }
         catch(error){

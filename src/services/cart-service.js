@@ -1,49 +1,10 @@
 import { cartDao } from "../daos/mongoDB/cart-dao.js"
 import CustomError from "../utils/custom-error.js"
+import Service from "./service.js"
 
-class CartService {
+class CartService extends Service {
     constructor(dao){
-        this.dao = dao
-    }
-
-    getAll = async () => {
-        try{
-            return await this.dao.getAll()
-        } catch (error){
-            throw error
-        }
-    }
-
-    getById = async (id) => {
-        try {
-            return await this.dao.getById(id);
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    create = async (body) => {
-        try{
-            return await this.dao.create(body)
-        }catch (error){
-            throw error
-        }
-    }
-
-    update = async (id, body) => {
-        try {
-            return await this.dao.update(id, body);
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    delete = async (id) => {
-        try {
-            return await this.dao.delete(id);
-        } catch (error) {
-            throw error;
-        }
+        super(dao)
     }
 
     findByIdPopulate = async (id , path, select) => {

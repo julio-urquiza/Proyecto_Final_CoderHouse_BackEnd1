@@ -35,6 +35,14 @@ export default class MongoDao {
     }
   };
 
+  updateOne = async (params, body) => {
+    try {
+      return await this.model.updateOne(params, body, { new: true });
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   delete = async (id) => {
     try {
       return await this.model.findByIdAndDelete(id);

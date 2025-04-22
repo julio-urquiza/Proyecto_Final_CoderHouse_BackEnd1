@@ -1,4 +1,4 @@
-import { Cartmodel } from "./models/cart.model.js";
+import { cartModel } from "./models/cart.model.js";
 import MongoDao from "./mongo-dao.js";
 
 class CartDao extends MongoDao {
@@ -7,4 +7,4 @@ class CartDao extends MongoDao {
     }
 }
 
-export const cartDao = new CartDao(CartModel);
+export const cartDao = new CartDao(cartModel);

@@ -7,6 +7,6 @@ const router = Router();
 
 router.post("/register", userController.register);
 router.post("/login", userController.login);
-router.get("/private-headers", passport.authenticate("jwt",{ session: false }), (req, res) => res.send(req.user));
+router.get("/sessions/current", passport.authenticate("jwt",{ session: false }), (req, res) => res.send(req.user));
 
 export default router;
