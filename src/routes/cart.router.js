@@ -27,3 +27,5 @@ cartRouter.delete('/:cid',cartController.eliminarTodosLosProductosDeCarrito)
 
 // DELETE api/carts/:cid/products/:pid deberá eliminar del carrito el producto seleccionado.
 cartRouter.delete('/:cid/products/:pid',cartController.eliminarProductoSeleccionadoDeCarrito)
+
+export default cartRouter

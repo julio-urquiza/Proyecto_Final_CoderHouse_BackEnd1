@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const cartSchema = new mongoose.Schema({
+const CartSchema = new mongoose.Schema({
     products: [
         {
             product: {
@@ -22,4 +22,4 @@ const cartSchema = new mongoose.Schema({
 //     next();
 // });
 
-export const cartModel = mongoose.model("carts", cartSchema);
+export const cartModel = mongoose.model("carts", CartSchema);

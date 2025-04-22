@@ -16,4 +16,4 @@ class ProductService extends Service {
     }
 }
 
-export const productService = ProductService(productDao)
+export const productService = new ProductService(productDao)
