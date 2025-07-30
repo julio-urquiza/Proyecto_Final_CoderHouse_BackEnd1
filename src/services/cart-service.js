@@ -7,9 +7,38 @@ class CartService extends Service {
         super(dao)
     }
 
+    agregarProducto = async (id, body) => {
+        try {
+            if(await this.dao.exists({_id:id, 'products.product': body.product })){
+                return await this.dao.updateOne({_id: id, 'products.product': body.product},{ $inc: {'products.$.quantity': body.quantity} })
+            }
+            return await this.dao.updateOne({_id: id},{ $push: { products: body } })
+        } catch (error) {
+            throw error
+        }
+    }
+
+    eliminarTodosProductosCarrito = async (id) => {
+        try {
+            return await this.dao.update(id,{ $set: { products: [] } })
+        } catch (error) {
+            throw error
+        }
+    }
+
+    eliminarProductoCarrito = async (cid, pid) => {
+        try {
+            return await this.service.update(cid,{ $pull: { products: { product: pid }}})
+        } catch (error) {
+            throw error
+        }
+    }
+
     findByIdPopulate = async (id , path, select) => {
         try{
-            return this.dao.findById(id).populate(path, select)
+            // const cart = await this.dao.getById(id)
+            // return cart.populate('products.product');
+            return (await this.dao.getById(id)).populate(path, select)
         }catch (error) {
             throw error
         }
@@ -17,7 +46,7 @@ class CartService extends Service {
 
     findPopulate = async (path, select) => {
         try{
-            return this.dao.find().populate(path,select)
+            return (await this.dao.getAll()).populate(path,select)
         }catch(error){
             throw error
         }

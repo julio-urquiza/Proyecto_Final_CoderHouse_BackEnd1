@@ -9,19 +9,19 @@ const productsRouter = Router()
 // -page permitirá devolver la página que queremos buscar, en caso de no recibir page, ésta será de 1
 // -query, el tipo de elemento que quiero buscar (es decir, qué filtro aplicar), en caso de no recibir query, realizar la búsqueda general
 // -sort: asc/desc, para realizar ordenamiento ascendente o descendente por precio, en caso de no recibir sort, no realizar ningún ordenamiento
-productsRouter.get('/', productController.traerListadoDeProductosFormateados)
+productsRouter.get('/', productController.traerDeProductosFormateados)
 
 //ruta get retorna el un producto por el id
 productsRouter.get('/:id', productController.traerProductoPorId)
 
 //ruta post para products
-productsRouter.post('/', productController.traerTodosLosProductos)
+productsRouter.post('/', productController.crearProducto)
 
 //ruta put para modificar productos
-productsRouter.put('/:id', productController.modificarProductos)
+productsRouter.put('/:id', productController.modificarProducto)
 
 //ruta put para eliminar productos
-productsRouter.delete('/:id', productController.eliminarProductos)
+productsRouter.delete('/:id', productController.eliminarProducto)
 
 export default productsRouter
 

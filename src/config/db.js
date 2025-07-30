@@ -1,8 +1,9 @@
 import { connect } from "mongoose";
+import 'dotenv/config'
 
 export const initMongoDB = async () => {
     try {
-        await connect("mongodb+srv://julio_urquiza:coder@codercluster.ku5ol.mongodb.net/ProyectoFinal?retryWrites=true&w=majority&appName=CoderCluster");
+        await connect(process.env.MONGO_CONEXION);
     } 
     catch (error) {
         throw new Error("Error al conectar a la base de datos");

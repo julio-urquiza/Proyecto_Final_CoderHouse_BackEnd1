@@ -1,10 +1,15 @@
 import passport from "passport"
 import { ExtractJwt, Strategy } from "passport-jwt"
-// import "dotenv/config"
+import "dotenv/config"
 
 const strategyConfig = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: "clave"
+    secretOrKey: process.env.CLAVE
+}
+
+const strategyConfigRecoveryToken = {
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    secretOrKey: process.env.CLAVE_RECUPERACION
 }
 
 const verifyToken = async (jwt_payload, done) => {
@@ -12,6 +17,8 @@ const verifyToken = async (jwt_payload, done) => {
     return done(null, jwt_payload)
 }
 
-passport.use("jwt", new Strategy(strategyConfig, verifyToken))
+
+passport.use("current", new Strategy(strategyConfig, verifyToken))
+passport.use("recovery", new Strategy(strategyConfigRecoveryToken, verifyToken))
 
 export default passport

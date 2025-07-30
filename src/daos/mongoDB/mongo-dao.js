@@ -5,7 +5,7 @@ export default class MongoDao {
 
   getAll = async () => {
     try {
-      return await this.model.find({});
+      return await this.model.find({})
     } catch (error) {
       throw new Error(error);
     }
@@ -37,7 +37,7 @@ export default class MongoDao {
 
   updateOne = async (params, body) => {
     try {
-      return await this.model.updateOne(params, body, { new: true });
+      return await this.model.findOneAndUpdate(params, body, { new: true });
     } catch (error) {
       throw new Error(error);
     }
@@ -49,6 +49,14 @@ export default class MongoDao {
     } catch (error) {
       throw new Error(error);
     }
-  };
+  }
+
+  exists = async (param) => {
+    try {
+      return await this.model.exists(param)
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 
 }  

@@ -5,7 +5,7 @@ class ProductController {
         this.service = service;
     }
 
-    traerListadoDeProductosFormateados = async(req, res) => {
+    traerDeProductosFormateados = async(req, res) => {
         try{
             const { limit = 10, page = 1, sort} = req.query;
     
@@ -39,7 +39,7 @@ class ProductController {
     traerProductoPorId = async (req, res) => {
         try{
             const { id } = req.params
-            const product = await this.service.getById(id).lean()
+            const product = await this.service.getById(id)
             res.send(product)
         }
         catch(error){
@@ -47,7 +47,7 @@ class ProductController {
         }
     }
 
-    traerTodosLosProductos = async (req ,res) => {
+    crearProducto = async (req ,res) => {
         try{
             const product = req.body
             const result = await this.service.create(product)
@@ -59,7 +59,7 @@ class ProductController {
         }
     }
 
-    modificarProductos = async (req, res) => {
+    modificarProducto = async (req, res) => {
         try{
             const { id } = req.params
             const product = req.body
@@ -71,7 +71,7 @@ class ProductController {
         }
     }
 
-    eliminarProductos = async (req, res) => {
+    eliminarProducto = async (req, res) => {
         try{
             const { id } = req.params
             const result = await this.service.delete(id)

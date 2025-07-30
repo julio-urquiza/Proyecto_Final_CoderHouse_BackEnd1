@@ -16,13 +16,11 @@ class CartController {
         }
     }
 
-    agregarProductosAlCarrito = async (req, res) => {
+    agregarProductoAlCarrito = async (req, res) => {
         try{
-            const {cid} = req.params
+            const {carrito} = req.user
             const products = req.body
-            const cart = await this.service.findById(cid)
-            cart.products.push(...products)
-            cart.save()
+            const cart = await this.service.agregarProducto(carrito,products)
             res.send(cart)
         }
         catch(error){
@@ -32,8 +30,8 @@ class CartController {
 
     traerTodosLosProductosDeUnCarritoPopulate = async (req, res) => {
         try{
-            const {id} = req.params
-            const cart = await this.service.findByIdPopulate(id,'products.product', '_id title price')
+            const {carrito} = req.user
+            const cart = await this.service.findByIdPopulate(carrito,'products.product', '_id title price')
             res.send(cart)
         }
         catch(error){
@@ -53,9 +51,8 @@ class CartController {
 
     actualizarCantProductosDeCarrito = async (req, res) => {
         try{
-            const {cid,pid} = req.params
-            const quantity = parseInt(req.body.quantity)
-            const cart = await this.service.updateOne({_id: cid , 'products.product': pid},{ $set: {'products.$.quantity' : quantity } })
+            const {carrito} = req.user
+            const cart = await this.service.updateOne({_id: carrito , 'products.product': req.body.product},{ $set: {'products.$.quantity': req.body.quantity } })
             res.send(cart)
         }
         catch(error){
@@ -63,27 +60,11 @@ class CartController {
         }
     }
 
-    actualizarCarritoConArregloProductos = async (req, res) => {
-        try{
-            const {cid} = req.params
-            const products = req.body
-            // const cart = await cartModel.updateOne(cid, { $set: { products: products } }, { new: true }) ???
-            const cart = await this.service.getById(cid)
-            cart.products = products
-            cart.save()
-            res.send(cart)
-        }
-        catch(error){
-            res.send({status: 'Ocurrio un error', error})
-        }
-    }
 
     eliminarTodosLosProductosDeCarrito = async (req, res) => {
         try{
-            const {cid} = req.params
-            const cart = await this.service.getById(cid)
-            cart.products = []
-            cart.save()
+            const {carrito} = req.user
+            const cart = await this.service.eliminarTodosProductosCarrito(carrito)
             res.send(cart)
         }
         catch(error){
@@ -93,8 +74,9 @@ class CartController {
 
     eliminarProductoSeleccionadoDeCarrito = async (req, res) => {
         try{
-            const {cid,pid} = req.params
-            const cart = await this.service.update(cid,{ $pull: { products: { product: pid }}})
+            const {carrito} = req.user
+            const {pid} = req.params
+            const cart = await this.service.eliminarProductoCarrito(carrito, pid)
             res.send(cart)
         }
         catch(error){
